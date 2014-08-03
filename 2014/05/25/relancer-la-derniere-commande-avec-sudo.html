@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>Relancer la dernière commande avec sudo | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="C’est probablement un truc connu, mais je l’ignorais jusqu’à aujourd’hui, je me le laisse ici, autant pour moi que pour ceux qui, comme moi jusqu’à au" />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Relancer la dernière commande avec sudo" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="cli">
+        <h1>
+            Relancer la dernière commande avec sudo
+        </h1>
+    </header>
+
+    <div class="content">
+        <blockquote>
+<p>C’est probablement un truc connu, mais je l’ignorais jusqu’à aujourd’hui, je me le laisse ici, autant pour moi que pour ceux qui, comme moi jusqu’à aujourd’hui, l’ignoraient.</p>
+</blockquote>
+<p>Si vous utilisez régulièrement la ligne de commande, vous savez sûrement que pour lancer une commande <em>en tant qu’administrateur</em>, il faut la préfixer par la commande <code>sudo</code>.</p>
+<pre><code>$ sudo <span class="keyword">ls</span> /var/<span class="keyword">log</span>
+</code></pre><p>Toutefois, je suis sûr que, comme moi, il vous arrive de temps à autre d’encoder une longue commande, de la lancer, puis de se rendre compte (ou de se faire rappeller à l’ordre) qu’on a oublié de lancer la commande avec sudo !</p>
+<p>Aujourd’hui, après avoir subit ce désagrément pour la énième fois de ma vie, j’ai décidé de faire une petite recherche, et ai découvert que, sur les systèmes UNIX (macosx, linux), le raccourci <code>!!</code> représente la dernière commande entrée.</p>
+<p>Imaginez que vous voulez installer sur votre système le package node yeoman : </p>
+<pre><code>npm <span class="keyword">install</span> -g yeoman
+</code></pre><p>En toute logique, vous devriez vous faire gronder, puisque c’est mieux de lancer cette commande en <em>mode administrateur</em>.<br>Pour remédier à ça sans pour autant avoir à retaper la commande, entrez simplement ceci : </p>
+<pre><code><span class="function_or_atom">sudo</span> <span class="exclamation_mark">!</span><span class="exclamation_mark">!</span>
+</code></pre><p>Qui équivaut donc à :</p>
+<pre><code><span class="built_in">sudo</span> npm install -g yeoman
+</code></pre><p>C’est bien pratique, et j’aurais tellement aimé faire cette recherche plus tôt… :)</p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2014-05-24T22:00:00.000Z">
+            25 mai 2014
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

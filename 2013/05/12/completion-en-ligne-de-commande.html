@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>Complétion en ligne de commande | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Dans le cadre du développement de vibox, un petit programme en ligne de commande pour gérer les machines virtuelles locales de VirtualBox, j’ai voulu " />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Complétion en ligne de commande" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="cli">
+        <h1>
+            Complétion en ligne de commande
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Dans le cadre du développement de <a href="http://leny.github.io/vibox" target="_blank" rel="external">vibox</a>, un petit programme en ligne de commande pour gérer les machines virtuelles locales de VirtualBox, j’ai voulu permettre l’utilisation de la touche <code>&lt;tab&gt;</code> pour la complétion sur les commandes, et, surtout, sur les noms de machines virtuelles.</p>
+<p>J’ai trouvé très, très, peu d’infos claires sur le net, encore moins en français.<br>Donc je vais partager ma méthode, en espérant qu’elle puisse servir à d’autres.</p>
+<p><em>Je suis développeur web. Bash et la ligne de commande, j’ai un peu appris ça tout seul. Donc si je n’utilise pas les <strong>bons</strong> mots, que les puristes me pardonnent.</em><br><em>Je préfère utiliser mes mots, au moins, je suis sûr de faire passer l’idée.</em></p>
+<h2 id="Complétion_en_ligne_de_commande,_fonctionnement">Complétion en ligne de commande, fonctionnement</h2>
+<p>Dans les grandes lignes, en <em>bash</em>, quand on appuie sur <code>&lt;tab&gt;</code>, l’interpréteur appelle un script qui retourne une liste de mots possibles dans le contexte, et enfin, selon les caractères déjà tapés, filtre les mots reçus pour n’afficher que les plus pertinents.<br>S’il n’y a plus qu’une proposition valide, alors le mot est complété.</p>
+<p>Voilà pour le principe.</p>
+<h2 id="Mise_en_place">Mise en place</h2>
+<p>La mise en place d’un mécanisme de complétion se fait en 3 étapes :</p>
+<ol>
+<li>Le script qui liste les mots</li>
+<li>Le mécanisme de complétion</li>
+<li>L’installation</li>
+</ol>
+<h3 id="1-_Listing_des_mots">1. Listing des mots</h3>
+<p>Quel que soit le langage utilisé, vous devez retourner une liste de mots, séparés par des <em>retours à la ligne</em> (<code>EOL</code>).</p>
+<p>Le mécanisme de complétion ne vous demande pas de faire le tri, il le fait lui-même, donc contentez-vous de lister les mots.</p>
+<h3 id="2-_Mécanisme_de_complétion">2. Mécanisme de complétion</h3>
+<p>Il vous faut maintenant créer un script <em>bash</em> qui va mettre en place le mécanisme.<br>Créez un fichier et collez le code suivant :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#!/usr/bin/env bash</span></div><div class="line"></div><div class="line"><span class="function"><span class="title">_complete</span></span>() {</div><div class="line">    local word=<span class="string">"<span class="variable">${COMP_WORDS[COMP_CWORD]}</span>"</span></div><div class="line"></div><div class="line">    COMPREPLY=( $(compgen -W <span class="string">"<span class="variable">$(my_prog --completion)</span>"</span> -- <span class="string">"<span class="variable">$word</span>"</span>) )</div><div class="line">}</div><div class="line"></div><div class="line">complete -F _complete my_prog</div></pre></td></tr></table></figure>
+
+<p>Il vous faut bien sûr remplacer <strong>my_prog</strong> par le nom de votre programme.</p>
+<p>Donc, dans l’exemple, <strong>my_prog —completion</strong> est la commande qui retourne la liste de mot, à vous de la remplacer par celle de votre programme.</p>
+<h3 id="3-_Installation">3. Installation</h3>
+<p>La dernière étape, c’est d’ajouter dans votre profil une commande pour indiquer que notre programme utilise l’autocomplétion.</p>
+<p>Modifiez votre fichier <code>.bashrc</code> ou <code>.profile</code> et ajoutez-y la ligne suivante :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">which myprog &gt; /dev/null && . /path/to/myprog_completion</div></pre></td></tr></table></figure>
+
+<p>Remplacez <strong>myprog</strong> par le nom de votre programme, et <strong>/path/to/myprog_completion</strong> par le chemin vers le fichier créé à l’étape 2.</p>
+<p>Redémarrez votre terminal, et tout devrait être ok.</p>
+<h2 id="Pour_aller_plus_loin…">Pour aller plus loin…</h2>
+<p>Il y a bien sûr toujours moyen d’aller plus loin, par exemple en retournant une liste de mots différente en fonction du nombre de commandes et sous-commandes entrées, etc…</p>
+<p>Pour creuser un peu plus, vous pouvez regarder <a href="https://github.com/leny/vibox" target="_blank" rel="external">le code de vibox</a>, ou <a href="https://github.com/gruntjs/grunt-cli/blob/master/completion/bash" target="_blank" rel="external">celui de Grunt</a>, par exemple.</p>
+<p>C’est toujours la meilleure façon d’apprendre de nouvelles choses.</p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2013-05-11T22:00:00.000Z">
+            12 mai 2013
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>Débugger ses designs responsive avec sass | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Un p’tit mixin sass pour débugger facilement un design responsive : il vous affiche une petite boite au-dessus de votre page, pour vous indiquer la la" />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Débugger ses designs responsive avec sass" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="css">
+        <h1>
+            Débugger ses designs responsive avec sass
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Un p’tit <em>mixin</em> sass pour débugger facilement un design responsive : il vous affiche une petite boite au-dessus de votre page, pour vous indiquer la largeur actuelle de la page dans l’unité de votre choix.</p>
+<p>C’est très pratique pendant l’élaboration d’un design responsive <em>moderne</em>, où vous définissez vos <code>media-queries</code> de manière logique (<a href="http://bradfrostweb.com/blog/post/7-habits-of-highly-effective-media-queries/#content" target="_blank" rel="external">plus d’infos à ce sujet ici</a>).</p>
+<h2 id="Le_mixin">Le mixin</h2>
+<figure class="highlight sass"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> rwdebug</span>( $unit: <span class="string">"em"</span>, $positions:<span class="preprocessor"> top</span><span class="preprocessor"> right</span> ) {</span></div><div class="line">    $max<span class="value">: <span class="number">150</span>;</span></div><div class="line">    <span class="at_rule">@<span class="keyword">if</span> $unit == <span class="string">"px"</span> {</span></div><div class="line">        $max<span class="value">: <span class="number">1920</span>;</span></div><div class="line">    }</div><div class="line">    <span class="at_rule">@<span class="keyword">for</span> $i<span class="preprocessor"> from</span><span class="preprocessor"> 10</span><span class="preprocessor"> to</span> $max {</span></div><div class="line">        <span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> screen</span><span class="preprocessor"> and</span> (<span class="preprocessor"> min-width</span>: $i *<span class="preprocessor"> 1</span>#{</span>$unit} ) {</div><div class="line">            <span class="tag">body</span><span class="pseudo">:before</span> {</div><div class="line">                <span class="attribute">content</span><span class="value">: <span class="string">"#{$i}#{$unit}"</span>;</span></div><div class="line">                <span class="attribute">position</span><span class="value">: fixed;</span></div><div class="line">                <span class="at_rule">@<span class="keyword">each</span> $property<span class="preprocessor"> in</span> $positions {</span></div><div class="line">                    #{$property}<span class="value">: <span class="number">0</span>;</span></div><div class="line">                }</div><div class="line">                <span class="attribute">padding</span><span class="value">: <span class="number">1</span>px <span class="number">3</span>px <span class="number">3</span>px;</span></div><div class="line">                <span class="attribute">background</span><span class="value">: black;</span></div><div class="line">                <span class="attribute">font</span><span class="value">: bold <span class="number">15</span>px/<span class="number">1</span> sans-serif;</span></div><div class="line">                <span class="attribute">color</span><span class="value">: white;</span></div><div class="line">                <span class="attribute">z-index</span><span class="value">: <span class="number">99999</span>;</span></div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="Utilisation">Utilisation</h2>
+<figure class="highlight sass"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="at_rule">@<span class="keyword">include</span> <span class="function">rwdebug()</span></span>;</div></pre></td></tr></table></figure>
+
+<p>Vous pouvez lui passer deux paramètres :</p>
+<ol>
+<li><strong>Unité:</strong> l’unité à observer (<code>px</code>, <code>em</code>, <code>rem</code>)</li>
+<li><strong>Position:</strong> la position du tooltip</li>
+</ol>
+<h2 id="Fonctionnement">Fonctionnement</h2>
+<p>Le principe est assez simple : le mixin génère une tripotée de media-queries spécifiques au tooltip.</p>
+<p><strong>Note:</strong> cette façon de faire est évidemment pas optimale pour les performances… mais on parle de debug ici.</p>
+<hr>
+<p><strong>Note 2:</strong> le mixin est en <code>scss</code>, mais à dire vrai, vous devriez essayer la syntaxe <code>sass</code>.</p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2013-12-21T23:00:00.000Z">
+            22 déc. 2013
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>De CSS à PHP à less à Sass à Stylus | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Le CSS et moi, c’est une longue histoire d’amour.
+Historiquement, c’est le deuxième langage que j’ai appris, en 98, juste après html et juste avant Ja" />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="De CSS à PHP à less à Sass à Stylus" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="css">
+        <h1>
+            De CSS à PHP à less à Sass à Stylus
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Le CSS et moi, c’est une longue histoire d’amour.</p>
+<p>Historiquement, c’est le deuxième langage que j’ai appris, en 98, juste après html et juste avant JavaScript.</p>
+<p>Et encore maintenant, l’intégration reste l’une de mes spécialités et donc l’un de mes gagne-pain en tant que <em>freelance</em>.</p>
+<h3 id="De_CSS_à_PHP">De CSS à PHP</h3>
+<p>Quand j’ai commencé à apprendre les langages de développement avec JavaScript puis PHP, j’ai assez vite voulu utiliser en CSS les avantages des variables, boucles et autres structures de contrôle…<br>Malheureusement, à l’époque, on ne parlait pas encore de <em>preprocesseurs</em>, et le plus simple, c’était de passer par PHP.</p>
+<p>C’est ainsi que dans le cadre d’un de mes premiers jobs en agence, j’ai développé un script php qui gênerait les feuilles de style d’un cms de manière dynamique, en utilisant des palettes de couleurs stockées en <em>base de donnees</em> et personalisables par le client à travers une <em>interface d’administration</em>.</p>
+<p>C’était sympa, mais assez lourd à mettre en place, pas toujours pratique, peu lisible, et au final vraiment anecdotique.<br>Ça a d’ailleurs été assez vite abandonné par l’agence en question après mon départ de l’équipe… et je ne leur en veux pas, j’ai fini par le faire aussi de mon côté.</p>
+<h3 id="De_PHP_à_less">De PHP à less</h3>
+<p><em>Bon, plutôt de </em>CSS à less<em>, puisque la génération de feuilles de styles en PHP fût assez vite abandonnée, mais bref.</em><br>Je l’avoue, je ne me rapelle plus du tout comment j’en suis venu à utiliser less.<br>J’ai toujours vainement cherché à utiliser des variables et des structures de contrôle en CSS, mais j’avais fini par en faire mon deuil, en attendant l’implementation, dans dix ans au moins, des spécifications officielles des variables CSS dans tous les navigateurs…<br>Puis je suis tombé sur less et j’ai découvert le paradis dont je rêvais : variables, fonctions (qu’on appellait à l’époque <em>mixins</em>, on fera la distinction entre les deux dans les versions plus récentes de l’outil), imbrication des sélecteurs… le rêve.<br>En découvrant less, j’ai aussi découvert l’application mac <strong>less</strong>, développée par Bryan Jones, qui allait un peu plus tard la faire évoluer sous la forme du genialissime <strong>CodeKit</strong>.</p>
+<p>Et pendant quelques années, j’ai utilisé less dans tout mes développements.</p>
+<h3 id="De_less_à_Sass">De less à Sass</h3>
+<p>J’ai découvert Sass en 2012, suite à quelques articles sur mes blogs favoris, et j’ai premièrement pas énormément aimé : plus de point-virgules, plus d’accolades, on est où, là ?<br>Mais Sass avait deux syntaxes distinctes : <strong>Scss</strong>, très proches de less et de CSS, et <strong>Sass</strong>, la fameuse syntaxe indentée qui me rebutait tant… Après quelques mois d’utilisation heureuse de Scss et de la librairie Compass, j’ai profité de mon adoption de <strong>coffeescript</strong> pour reconnaître que la syntaxe indentée, c’est quand même juste plus clair, plus propre, plus…mieux, en somme.<br>Et donc, d’à peu près l’automne 2012 à décembre 2013, j’étais un farouche défenseur de la syntaxe indentée de Sass… jusqu’à ce que le soufflé retombe.</p>
+<h3 id="De_Sass_à_Stylus">De Sass à Stylus</h3>
+<p>Sass, c’est génial, mais la communauté à l’air de beaucoup plus aimer Scss… <em>Les goûts et les couleurs</em>, soit… mais là ou ça devient gênant, c’est quand les développeurs annoncent que dans le futur, Scss sera la seule branche à évoluer, en espérant que d’autres contributeurs fassent vivre la syntaxe indentée…<br>Bon, ca, ça pourrait encore passer, mais le plus gros problème de Sass, c’est son compilateur, en <strong>ruby</strong>. Et ce compilateur est lent. Très <em>lent</em>. Très, <em>très</em> lent…</p>
+<p>Et surtout, il est en <strong>ruby</strong>. Comprenons-nous bien : je n’ai rien de particulier contre ruby, mais je n’utilise jamais ce langage dans le cadre de mes développements web : j’utilise soit <strong>node.js</strong>, soit je développe en statique (généralement quand ma mission se limite à l’intégration seule d’un design).<br>C’est vrai que dans le cadre de ce second cas, je peux encore utiliser ruby qui est installé en natif sur mon mac, mais en fait, dans les deux cas, j’ai pris l’habitude de faire tout mes travaux dans des environnements virtuels grâce <strong>vagrant</strong> (j’en reparlerai à l’occasion d’un billet dedié), et dans ce cas, installer ruby sur une vm juste pour Sass, c’est un petit peu <em>overkill</em>.</p>
+<p>Bref, ces deux raisons m’ont doucement fait perdre ma foi en Sass pour chercher une alternative plus proche de mes besoins, et cette alternative c’est révélée être <strong>Stylus</strong>.<br>Stylus est en effet très très proche de la syntaxe de Sass (et va même plus loin dans sa quête de simplicité en supprimant les <em>deux points</em> entre les propriétés et leurs valeurs), et surtout, il est entièrement interprété en JavaScript, ce qui en fait un outil de choix, qui s’intègre complément dans mon <em>workflow</em>.</p>
+<hr>
+<p>Un petit mot pour conclure : ne soyez pas freiné par la syntaxe indentée : elle est certes bizarre à lire (au début), mais se révèle bien plus claire, et surtout bien plus propre : le langage vous oblige à écrire votre code proprement, et écrire son code comme un cochon n’est clairement l’apanage du <em>bon developpeur</em>…</p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2014-01-23T23:00:00.000Z">
+            24 janv. 2014
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

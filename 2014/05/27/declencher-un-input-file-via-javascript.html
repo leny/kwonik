@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>Déclencher un `input file` via javascript | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Tout le monde le reconnaîtra, s’il y a bien un contrôle dont le rendu est bien moche sur les navigateurs, c’est le champs d’ajout de fichier, le fameu" />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Déclencher un `input file` via javascript" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="tech">
+        <h1>
+            Déclencher un `input file` via javascript
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Tout le monde le reconnaîtra, s’il y a bien un contrôle dont le rendu est bien moche sur les navigateurs, c’est le champs d’ajout de fichier, le fameux <code>&lt;input type=&quot;file&quot; /&gt;</code>.<br>Proprement <em>instylable</em>, la tendance est de le masquer pour le déclencher à distance, surtout depuis que des API HTML5 permettent de faire des <em>preview</em> des fichiers en attente d’envoi.</p>
+<p>Via <strong>jQuery</strong>, pour déclencher un <code>input file</code>, le simple bout de code suivant fait l’affaire : </p>
+<pre><code><span class="variable">$(</span> <span class="string">"#my-input-file"</span> ).trigger( <span class="string">"click"</span> );
+</code></pre><p>Et votre navigateur affichera la fenêtre de dialogue pour choisir le fichier à traiter.</p>
+<p>Récemment, dans le cadre d’un projet client, j’ai implémenté ce comportement pour un upload d’images liées à un message, un truc très rigolo, avec des uploads de fichiers en parallèle via AJAX, bref, de <em>l’amusement de codeur</em>… :)</p>
+<p>Ce site devant impérativement fonctionner sur mobile, je me suis attelé à mes tests pour me rendre compte que, si le déclenchement à distance d’un input file fonctionnait partout (sauf Android 2.3, qui de toutes façons ne supporte pas grand chose - dont l’upload tout court), il ne fonctionnait pas sur Android 4+, alors que dans les specs, il est bien indiqué que si !</p>
+<p>Et en fait, c’est juste une <em>bêtise</em> : sur Android 4+, un <code>input file</code> ne peut être délenché à distance que s’il est <strong>visible</strong>. Jusque là, via css, mon <code>input file</code> était en <code>display: none</code>, mais ça ne marche pas avec Android 4+. J’ai essayé pas mal de combinaison, à base de <code>visibility: hidden</code> ou autre, mais au final, la seule qui marche bien, c’est celle-ci :</p>
+<pre><code><span class="id">#my-input-file</span> <span class="rules">{
+    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;
+    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>;
+    <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">9999</span>px</span></span>;
+<span class="rule">}</span></span>
+</code></pre><p>Avec ces styles, votre <code>input file</code> n’est pas visible à l’écran, mais reste déclenchable via javascrit avec tous les navigateurs du marché.</p>
+<p>En espérant que ça serve à d’autres :)</p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2014-05-26T22:00:00.000Z">
+            27 mai 2014
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

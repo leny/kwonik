@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>A Stylus in a Jade Coffee cup... | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Sous ce titre juste un peu geek, se cachent mes trois langages de travail principaux, ou presque.Ces trois langages ont plusieurs points communs :
+
+Ce" />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="A Stylus in a Jade Coffee cup..." />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="tech">
+        <h1>
+            A Stylus in a Jade Coffee cup...
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Sous ce titre juste un peu geek, se cachent mes trois langages de travail principaux, ou presque.<br>Ces trois langages ont plusieurs points communs :</p>
+<ul>
+<li>Ce sont des langages <strong>à compiler</strong> : en effet, ils sont tous destinés à être compilé, transformé vers un langage final : <em>javascript</em> pour <a href="http://coffeescript.org" target="_blank" rel="external">coffeescript</a>, <em>HTML</em> pour <a href="http://jade-lang.com/" target="_blank" rel="external">jade</a> et <em>CSS</em> pour <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a>.</li>
+<li>Ce sont des langages qui <strong>évoluent</strong> : ils sont tous les trois open-source et <em>hostés</em> sur github.</li>
+<li>Enfin, ce sont des langages qui ont ce que j’appelle une <strong>intolérance à l’erreur de style</strong> : comme en <strong>Python</strong>, la <em>mise en page</em> fait partie de la syntaxe du langage, obligeant le développeur à une certaine rigueur.</li>
+</ul>
+<p>Analysons un peu tout cela.</p>
+<h3 id="Langages_compilés">Langages compilés</h3>
+<p>À vrai dire, ce point peut être pris comme un inconvénient : on ne peut pas écrire du jade, du coffeescript ou du Stylus et l’utiliser tel quel (sauf cas <em>très</em> spécifiques) : on doit d’abord les transformer en les compilant.<br>Toutefois, avec tous les outils sur le marché, ce désagrément n’en est plus un, que ce soit en passant par des outils <em>tout-en-un</em> et simples à utiliser comme <a href="http://incident57.com/codekit/" target="_blank" rel="external">CodeKit</a> ou <a href="http://alphapixels.com/prepros/" target="_blank" rel="external">PrePros</a>, ou des outils plus complexes mais autrement plus puissant comme <a href="http://gruntjs.com" target="_blank" rel="external">Grunt</a>, <a href="http://guardgem.org" target="_blank" rel="external">Guard</a> ou, plus récemment, <a href="http://gulpjs.com" target="_blank" rel="external">Gulp</a>.</p>
+<h3 id="Des_langages_qui_évoluent">Des langages qui évoluent</h3>
+<p>Le but de ces trois langages, c’est de faciliter l’écriture et la génération du langage final grâce à des raccourcis (ce qu’on appelle aussi des <em>sucres syntaxiques</em>) et/ou des fonctions utilitaires pour accélérer des procédures répétitives (comme ajouter les <em>vendor prefix</em> en CSS).</p>
+<p>Il va donc de soi que ces langages doivent pouvoir évoluer et s’adapter aux nouveautés de leur <em>langages cibles</em>, ainsi qu’aux évolutions des pratiques en matière de développement moderne, la contribution libre à ces langages via des plateformes comme <a href="https://github.com" target="_blank" rel="external">github</a> ou <a href="https://bitbucket.org" target="_blank" rel="external">bitbucket</a> est donc obligatoire.</p>
+<p>C’est ainsi que j’ai eu l’occasion de proposer des fonctions utilitaires de manipulation de couleurs dans Stylus, fonctions qui ont été validées par les responsables du projet et ajoutées à la version 0.42.</p>
+<h3 id="Intolérance_à_l’erreur_de_style">Intolérance à l’erreur de style</h3>
+<p>Sous cette tournure de phrase un peu barbare se cache une façon d’écrire du code que j’ai mis du temps à accepter puis intégrer : les <strong>langages strictement indentés</strong>.<br>Dans la plupart des langages de programmation, une bonne indentation du code aide sa lisibilité, sa relecture et sa compréhension, et avoir une indentation cohérente sur un projet est l’un des piliers des <em>bonnes pratiques</em> de développement en équipe.</p>
+<p>Dans les langages strictement indentés, l’indentation <em>fait partie</em> de la syntaxe du langage, et défini les structures et blocs de celui-ci.<br>Ces langages ont l’avantage, puisqu’ils génèrent des erreurs de compilations lors d’une mauvaise indentation, d’imposer aux développeurs une certaine hygiène de code qui est plaisante et utile (et qui font de ce genre de langages de très bons sujets d’enseignement).</p>
+<h2 id="Bon,_ok,_mais_ça_fait_quoi,_tout_ça_?">Bon, ok, mais ça fait quoi, tout ça ?</h2>
+<p>Je vous invite à essayer par vous-même ces trois langages, qui sont tous assez simples à prendre en main.</p>
+<p>J’aurais toutefois un avertissement : <strong>avant de vous pencher sur un langage qui se compile vers un autre langage, soyez certains de bien connaître ce langage cible</strong> : ça a l’air d’être une évidence, dis comme ça, mais on croise souvent sur les forums des développeurs qui ont voulu se mettre à un langage comme coffeescript par simple <em>effet de mode</em> sans pour autant connaître <em>convenablement</em> javascript, et qui s’étonnaient des résultats (logiques) de leur compilation… </p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2014-01-12T23:00:00.000Z">
+            13 janv. 2014
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

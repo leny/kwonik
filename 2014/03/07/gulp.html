@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>Gulp | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Au début de l’année 2014 (pfiou, ça fait déjà 3mois), j’ai essayé Gulp, un concurent de Grunt, qui fonctionnait sur un principe différent, axé sur la " />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Gulp" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="node">
+        <h1>
+            Gulp
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Au début de l’année 2014 (<em>pfiou</em>, ça fait déjà 3mois), j’ai essayé <a href="http://gulpjs.com" target="_blank" rel="external">Gulp</a>, un <em>concurent</em> de <a href="http://gruntjs.com" target="_blank" rel="external">Grunt</a>, qui fonctionnait sur un principe différent, axé sur la manipulation de fichiers en tant que <em>streams</em>, accélérant énormément les opérations sur ces fichiers.</p>
+<p>À l’époque, sur le papier, c’était tentant, mais malheureusement, le manque de plugin (et l’absence complète de temps pour en écrire de mon côté), m’ont fait rester sur <strong>Grunt</strong>, en laissant tout de même une note dans mon cahier : essayer gulp dans quelques semaines, le temps de laisser la communauté écrire quelques plugins intéressants.</p>
+<p>Et par la force des choses, j’en suis venu à devoir regarder <strong>Gulp</strong> de plus près, et ce bien plus vite que je ne le pensais.</p>
+<p>En effet, dans le cadre d’un gros projet pro qui fera en temps et en heures l’objet d’un ou plusieurs billets, je travaillais avec le workflow suivant :</p>
+<ul>
+<li>Code en <code>Literate CoffeeScript</code>, <code>Stylus</code> et <code>Jade</code></li>
+<li>Données stockées via <code>MongoDB</code> et <code>Redis</code></li>
+<li>Tâches de travail via <code>Grunt</code></li>
+<li>Serveur de test sur une <code>Vagrant</code> avec <code>nodemon</code></li>
+</ul>
+<p>Le workflow n’a pas été mis en place tel quel dès le début, il s’est construit au fur et à mesure du développement du projet, mais après deux mois de travail, en octobre 2013, j’étais sur ce workflow et c’était vraiment un plaisir.<br>En effet, quand je devais commencer à bosser sur le projet, je naviguais dans le dossier du repo depuis mon Terminal, je rentrais la commande <code>vagrant up &amp;&amp; vagrant ssh</code>, puis une fois tout le système déployé, je n’avais plus qu’à taper <code>grunt work</code> pour commencer à bosser.<br>Jamais besoin de m’inquièter, juste à coder.</p>
+<p>Mais un jour de février, le drame. Sur base régulière mais aléatoire, les tâches de <code>watch</code> et <code>nodemon</code> plantaient, devaient être relancées à la main, et ça perturbait énormément mon travail de développement : impossibilité de travailler car des compilations se lançaient au milieux de requêtes de test sur le serveur, fichiers compilés corrompus car réécrits en cours de compilation, bref, un bel enfer, et pas moyen de bosser.</p>
+<p>Et ça me fait mal de le dire, mais à ce jour, je ne sais toujours pas ce qu’il s’est passé.</p>
+<p>J’ai bien ma petite idée : une dépendance d’une tâche Grunt qui auraient été mise à jour et aurait générer des bugs, mais rien dans la console, rien dans les logs, rien sur github, aucun moyen d’identifier clairement la source du problème.</p>
+<p>Dans ce cas-là, on a pas le choix, il faut rebondir (<em>surtout que ça arrivait un jeudi soir, et qu’on avait convenu avec le client de mettre en ligne une nouvelle version de travail chaque fin de semaine</em>) : il me restait pas mal de boulot à terminer, et vite, et je ne me vois pas dire à mon client “mes outils m’ont lâchés”.</p>
+<p>Du coup, j’ai passé une nuit blanche à la fois instructive et stressante, où j’ai migré une partie de mon workflow sur Gulp, en serrant les fesses et en espérant que ça marche.<br>Un p’tit coup de <em>spoiler</em> : ça a marché.</p>
+<p><strong>Gulp</strong>, il faut dire ce qui est, c’est vraiment terrible. Puissant, rapide, simple à mettre en place… mais aussi très gourmand. Très, très gourmand.</p>
+<p>Ça a été un des premiers problèmes rencontré : mon <em>workflow</em> avec <strong>Grunt</strong> était assez <code>comple(t|xe)</code> : tous les fichiers <code>jade</code>, <code>litcoffee</code> et <code>stylus</code> étaient observés, et à chaque changement, compilés, et le serveur relancé grâce à <code>nodemon</code>.<br>Un process assez lourd, mais qui fonctionnait très bien jusque là, <em>quoi qu’un peu lent</em>, mais on y reviendra.</p>
+<p>Quand j’ai eu fini de retranscrire la base de ce workflow avec <strong>Gulp</strong>, les résultats en local sur le mac étaient hallucinant : à chaque modification sur un fichier, <strong>Gulp</strong> compilait le tout en généralement moins d’un quart de secondes, là où <strong>Grunt</strong> avait souvent besoin d’un peu plus d’une seconde pour faire la même chose.<br>Seulement, quand <strong>Gulp</strong> tournait sur la <em>VagrantBox</em>, il prennait un bon gros 5 secondes, parfois plus (<em>beaucoup plus !</em>) pour le même résultat, avec en plus des pics CPU assez important, allant parfois jusqu’à faire planter la Vagrant.</p>
+<p>Du coup, j’ai dû changer mon fusil d’épaule : laisser <code>nodemon</code> seul tourner sur la <em>VagrantBox</em>, et lancer le workflow <strong>Gulp</strong> en local, sur mon mac.<br>Et là, c’était déjà vachement plus mieux, mais pas encore <em>top</em>.</p>
+<p>Cette fois-ci, c’était la faute à <code>nodemon</code>.</p>
+<p><strong>Nodemon</strong> est un <a href="https://www.npmjs.org/package/nodemon" target="_blank" rel="external">package npm</a> qui lance un script node et le <em>monitore</em> (néologisme, bonsoir) : il observe un ou plusieurs dossiers, et si les fichiers changent, il relance le code.<br>Pratique, donc.</p>
+<p>Mais depuis quelques semaines et la sortie de la version 1.0 de <strong>nodemon</strong>, je le trouve de plus en plus lent : lent à repérer les changements dans les fichiers, lent à redémarrer le script, et parfois aussi carrément dans les choux, déclarant voir des modifications quand il n’y en a pas.<br>Bref, plus du tout fiable.<br>Et c’est bien embêtant dans le cadre d’un outil aussi important dans mon workflow.</p>
+<p>Le problème, c’est que de mon côté, je n’avais pas le temps d’investiguer le code de <strong>nodemon</strong>, d’attendre les réponses de ses créateurs, espérer qu’elles soient rapides, etc…<br>Il me fallait une solution, et vite.</p>
+<p>Du coup, je suis tombé sur <a href="https://www.npmjs.org/package/supervisor" target="_blank" rel="external">supervisor</a>.<br>Créé et maintenu à l’origine pas le créateur de <strong>npm</strong>, <strong>supervisor</strong> fait la même chose que <strong>nodemon</strong>.<br>Après quelques tests, il s’avérait aussi qu’il le faisait de manière beaucoup plus rapide.</p>
+<p>Le <em>hic</em>, c’est que <strong>supervisor</strong> n’avait aucun plugin pour <strong>grunt</strong> ou <strong>gulp</strong>.<br>Ce n’était pas vraiment un obstacle en soit, et d’ailleurs je n’avais pas le temps dans l’immédiat (ce qui par la suite a été vite corrigé, puisque j’ai codé et publié <a href="https://www.npmjs.org/package/grunt-supervisor" target="_blank" rel="external">grunt-supervisor</a> et <a href="https://www.npmjs.org/package/gulp-supervisor" target="_blank" rel="external">gulp-supervisor</a>)</p>
+<p>Une fois <strong>supervisor</strong> installé à la place de <strong>nodemon</strong>, j’avais enfin un workflow opérationnel, au prix d’une nuit blanche et d’une grosse angoisse.</p>
+<p>Et il s’avère au final que ce workflow est bien plus performant que l’ancien, donc…</p>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2014-03-06T23:00:00.000Z">
+            7 mars 2014
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr_BE">
+    <head>
+        <meta charset="utf-8" />
+        
+        <title>Masquer la barre d&#39;adresse sur mobile | blog.leny.me</title>
+        <meta name="author" content="Leny">
+        
+        <meta name="description" content="Sur mobile, la place est comptée, les écrans sont petits, et tous les pixels économisés le sont pour un bien.
+Du coup, si on peut masquer la barre d’a" />
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Masquer la barre d&#39;adresse sur mobile" />
+        <meta property="og:site_name" content="blog.leny.me" />
+
+        
+        <meta property="og:image" content="undefined" />
+        
+
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="alternate" href="/atom.xml" title="blog.leny.me" type="application/atom+xml" />
+        <link rel="stylesheet" href="/styles/styles.css" media="screen" type="text/css" />
+        <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+            <div id="toplinks">
+                <a href="http://leny.me" rel="external">
+                    leny.me
+                </a>
+                <a href="http://blog.leny.me">
+                    blog.leny.me
+                </a>
+            </div>
+
+            <header>
+                <h1>
+    <a href="/">
+        blog.leny.me
+    </a>
+</h1>
+
+            </header>
+
+            <section id="content">
+                
+    
+
+<article>
+    <header class="mobile">
+        <h1>
+            Masquer la barre d&#39;adresse sur mobile
+        </h1>
+    </header>
+
+    <div class="content">
+        <p>Sur mobile, la place est comptée, les écrans sont petits, et tous les pixels économisés le sont pour un bien.</p>
+<p>Du coup, si on peut masquer la barre d’adresse sur mobile, c’est un sacré gain de place.</p>
+<p>Voici comment faire, en quelques lignes de javascript.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">( <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> bIsMobile = ( <span class="regexp">/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i</span> ).test( navigator.userAgent );</div><div class="line"></div><div class="line">    <span class="keyword">var</span> hideToolbar = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span></div><div class="line">        window.scrollTo( <span class="number">0</span>, <span class="number">1</span> );</div><div class="line">    }</div><div class="line"></div><div class="line">    window.addEventListener( <span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span></div><div class="line">        <span class="keyword">if</span>( bIsMobile ) {</div><div class="line">            setTimeout( hideToolbar, <span class="number">0</span> );</div><div class="line">        }</div><div class="line">    } );</div><div class="line"></div><div class="line">} ).call( <span class="keyword">this</span> );</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <footer>
+        <span class="author">
+            leny
+        </span>
+        <time datetime="2013-05-11T22:00:00.000Z">
+            12 mai 2013
+        </time>
+    </footer>
+</article>
+
+<div class="comments">
+    <p>
+        Il n'y a pas de module de <strong>commentaires</strong> sur ce blog, principalement pour éviter à devoir gérer avec les spams, la pub, les insultes, ...
+    </p>
+    <p>
+        Toutefois, si vous avez quelque chose à dire/corriger/modifier, ou simplement exprimer votre opinion sur un post, n'hésitez pas à me contacter sur Twitter (<a href="//twitter.com/leny_be" rel="external">@leny_be</a>).
+    </p>
+</div>
+
+
+            </section>
+
+            <footer>
+                <p>
+    <span id="copyleft">&#61948;</span><a href="http://leny.me" rel="external">leny.me</a> - <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="external">Contenu sous licence CC by-sa</a>
+</p>
+<p>
+    Powered by <a href="http://zespia.tw/hexo/" rel="external">hexo</a>.<br />
+    Theme by <a href="http://leny.me" rel="external">leny</a>, inspired by <a href="http://arturkim.com/" rel="external">Artur Kim</a>.
+</p>
+
+            </footer>
+        </div>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-39717980-3', 'leny.me');
+  ga('send', 'pageview');
+</script>
+
+    </body>
+</html>
